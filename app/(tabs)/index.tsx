@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import Toast from "react-native-toast-message";
-import AddTaskModal from "../../components/AddTaskModal";
-import TaskForm from "../../components/TaskForm";
-import TaskItem from "../../components/TaskItem";
 import { supabase } from "../../lib/supabase";
+import CameraScreen from "../CameraScreen";
 
 type Task = {
   id: string;
@@ -81,30 +79,7 @@ export default function App() {
     loadTasks();
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <View style={headerStyles.header}>
-        <Text style={headerStyles.title}>TaskFlow</Text>
-      </View>
-      <TaskForm task={task} setTask={setTask} onAdd={handleOpenModal} />
-      <FlatList
-        data={tasks}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TaskItem
-            item={item}
-            onToggle={toggleTask}
-            onDelete={handleDeleteTask}
-          />
-        )}
-      />
-      <AddTaskModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onSubmit={handleSubmitTask}
-      />
-    </View>
-  );
+  return <CameraScreen />;
 }
 
 const headerStyles = StyleSheet.create({
